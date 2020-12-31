@@ -3,6 +3,7 @@ package kata
 object Cryptarithm {
     private val allDigits = (0..9).toList()
 
+
     fun alphametics(puzzle: String): String {
         val words = puzzle.split(" ").filter { it.toCharArray().all { l -> l.isLetter() } }.map { it.toCharArray() }
         val firstChars = words.map { it.first() }
@@ -52,11 +53,11 @@ object Cryptarithm {
     }
 }
 
-private fun List<Int>.combinations(n: Int): List<List<Int>> {
+private fun List<Int>.combinations(n: Int): List<IntArray> {
     if (n == 0) return listOf()
-    fun perm(a: List<Int>, result: List<Int>, l: Int): MutableList<List<Int>> {
+    fun perm(a: List<Int>, result: IntArray, l: Int): MutableList<IntArray> {
         if (result.size == l) return mutableListOf(result)
-        val combinations = mutableListOf<List<Int>>()
+        val combinations = mutableListOf<IntArray>()
         for (i in a.indices) {
             if (result.contains(a[i])) continue
             val nr = result + a[i]
@@ -64,5 +65,5 @@ private fun List<Int>.combinations(n: Int): List<List<Int>> {
         }
         return combinations
     }
-    return perm(this, listOf(), n)
+    return perm(this, intArrayOf(), n)
 }
